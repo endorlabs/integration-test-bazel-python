@@ -1,0 +1,22 @@
+load("@rules_python//python:py_binary.bzl", "py_binary")
+load("@pip_deps//:requirements.bzl", "requirement")
+load("@rules_python//python:pip.bzl", "compile_pip_requirements")
+
+compile_pip_requirements(
+    name = "compile_requirements",
+    requirements_in = "requirements.in",
+    requirements_txt = "requirements_lock.txt",
+)
+
+
+py_binary(
+  name = "main",
+  main = "scraper.py",
+  srcs = ["scraper.py"],
+  deps = [
+    requirement("requests"),
+    requirement("beautifulsoup4"),
+    requirement("lxml"),
+    requirement("aiohttp"),
+  ]
+)
