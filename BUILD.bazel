@@ -5,6 +5,31 @@ load("@pip_deps//:requirements.bzl", "requirement")
 load("@io_bazel_rules_docker//python:image.bzl", "py_image")
 load("@io_bazel_rules_docker//python3:image.bzl", "py3_image")
 
+# If you really want to try out a PY2 Runtime, Switch to a real old version of python_rules and Use a Runtime Pair,
+# The Interpreter should be installed in your local system for this to usable
+
+
+# load("@rules_python//python:py_runtime.bzl", "py_runtime")
+# load("@rules_python//python:py_runtime_pair.bzl", "py_runtime_pair")
+
+# py_runtime(
+#     name = "py2_runtime",
+#     interpreter_path = "/Users/aswinmylraj/.pyenv/versions/2.7.18/bin", # Update to Correct Location ( pyenv install 2.7.18 is fastest way )
+#     python_version = "PY2",
+# )
+
+# py_runtime_pair(
+#     name = "runtime_pair",
+#     py2_runtime = ":py2_runtime",
+#     py3_runtime = "@python_3_13//:py3_runtime", # Loading Runtime Registered via python_register_toolchains
+# )
+
+# toolchain(
+#     name = "my_toolchain",
+#     target_compatible_with = <...>,
+#     toolchain = ":my_py_runtime_pair",
+#     toolchain_type = "@rules_python//python:toolchain_type",
+# )
 
 
 compile_pip_requirements(

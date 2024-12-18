@@ -200,3 +200,5 @@ eclipse-*bin/
 user.bazelrc
 
 venv/
+
+plugin_*

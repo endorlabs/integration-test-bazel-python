@@ -41,6 +41,12 @@ http_archive(
     url = "https://github.com/bazelbuild/rules_python/releases/download/1.0.0/rules_python-1.0.0.tar.gz",
 )
 
+# http_archive(
+#     name = "rules_python",
+#     sha256 = "a3a6e99f497be089f81ec082882e40246bfd435f52f4e82f37e89449b04573f6",
+#     strip_prefix = "rules_python-0.10.2",
+#     url = "https://github.com/bazelbuild/rules_python/archive/refs/tags/0.10.2.tar.gz",
+# )
 
 load("@rules_python//python:repositories.bzl", "py_repositories")
 py_repositories()
@@ -50,8 +56,6 @@ load("@rules_python//python:repositories.bzl", "python_register_toolchains")
 
 python_register_toolchains(
     name = "python_3_13",
-    # Available versions are listed in @rules_python//python:versions.bzl.
-    # We recommend using the same version your team is already standardized on.
     python_version = "3.13",
 )
 
