@@ -208,6 +208,10 @@ idna==2.10 \
     # via
     #   requests
     #   yarl
+lockfile==0.12.2 \
+    --hash=sha256:6aed02de03cba24efabcd600b30540140634fc06cfa603822d508d5361e9f799 \
+    --hash=sha256:6c3cb24f344923d30b2785d5ad75182c8ea7ac1b6171b08657258ec7429d50fa
+    # via python-daemon
 lxml==5.3.0 \
     --hash=sha256:01220dca0d066d1349bd6a1726856a78f7929f3878f7e2ee83c296c69495309e \
     --hash=sha256:02ced472497b8362c8e902ade23e3300479f4f43e45f4105c85ef43b8db85229 \
@@ -530,6 +534,10 @@ propcache==0.2.1 \
     # via
     #   aiohttp
     #   yarl
+python-daemon==3.1.2 \
+    --hash=sha256:b906833cef63502994ad48e2eab213259ed9bb18d54fa8774dcba2ff7864cec6 \
+    --hash=sha256:f7b04335adc473de877f5117e26d5f1142f4c9f7cd765408f0877757be5afbf4
+    # via -r requirements.in
 requests==2.25.0 \
     --hash=sha256:7f1a0b932f4a60a1a65caa4263921bb7d9ee911957e0ae4a23a6dd08185ad5f8 \
     --hash=sha256:e786fa28d8c9154e6a4de5d46a1d921b8749f8b74e28bde23768e5e16eece998

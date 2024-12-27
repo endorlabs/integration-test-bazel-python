@@ -1,7 +1,7 @@
-import asyncio
 import aiohttp
 import requests
 from bs4 import BeautifulSoup
+from utils.asyncRunner import runAsync
 
 async def scrape_website(url, depth=1):
     try:
@@ -30,4 +30,4 @@ async def scrape_website(url, depth=1):
 if __name__ == "__main__":
     url_to_scrape = input("Enter the URL to scrape: ")
     depth = int(input("Enter the depth for scraping: "))
-asyncio.run(scrape_website(url_to_scrape, depth=depth))
+    runAsync(scrape_website, url_to_scrape)

@@ -48,6 +48,8 @@ py_binary(
     requirement("beautifulsoup4"),
     requirement("lxml"),
     requirement("aiohttp"),
+    requirement("python-daemon"),
+    "//utils:async-utils"
   ]
 )
 
@@ -60,6 +62,8 @@ py_image(
     requirement("beautifulsoup4"),
     requirement("lxml"),
     requirement("aiohttp"),
+    requirement("python-daemon"),
+    "//utils:async-utils"
   ]
 )
 
@@ -73,5 +77,7 @@ py3_image(
     requirement("beautifulsoup4"),
     requirement("lxml"),
     requirement("aiohttp"),
+    requirement("python-daemon"),
+    "//utils:async-utils"
   ]
 )
