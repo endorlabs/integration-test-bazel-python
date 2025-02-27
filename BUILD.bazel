@@ -1,13 +1,12 @@
-load("@rules_python//python:py_binary.bzl", "py_binary")
-load("@rules_python//python:pip.bzl", "compile_pip_requirements")
-load("@pip_deps//:requirements.bzl", "requirement")
-
 load("@io_bazel_rules_docker//python:image.bzl", "py_image")
 load("@io_bazel_rules_docker//python3:image.bzl", "py3_image")
+load("@pip_deps//:requirements.bzl", "requirement")
+load("@rules_python//python:packaging.bzl", "py_wheel")
+load("@rules_python//python:pip.bzl", "compile_pip_requirements")
+load("@rules_python//python:py_binary.bzl", "py_binary")
 
 # If you really want to try out a PY2 Runtime, Switch to a real old version of python_rules and Use a Runtime Pair,
 # The Interpreter should be installed in your local system for this to usable
-
 
 # load("@rules_python//python:py_runtime.bzl", "py_runtime")
 # load("@rules_python//python:py_runtime_pair.bzl", "py_runtime_pair")
@@ -31,53 +30,65 @@ load("@io_bazel_rules_docker//python3:image.bzl", "py3_image")
 #     toolchain_type = "@rules_python//python:toolchain_type",
 # )
 
-
 compile_pip_requirements(
     name = "compile_requirements",
     requirements_in = "requirements.in",
     requirements_txt = "requirements_lock.txt",
 )
 
-
 py_binary(
-  name = "main",
-  main = "scraper.py",
-  srcs = ["scraper.py"],
-  deps = [
-    requirement("requests"),
-    requirement("beautifulsoup4"),
-    requirement("lxml"),
-    requirement("aiohttp"),
-    requirement("python-daemon"),
-    "//utils:async-utils"
-  ]
+    name = "main",
+    srcs = ["scraper.py"],
+    main = "scraper.py",
+    deps = [
+        requirement("requests"),
+        requirement("beautifulsoup4"),
+        requirement("lxml"),
+        requirement("aiohttp"),
+        requirement("python-daemon"),
+        "//utils:async-utils",
+    ],
 )
 
 py_image(
-  name = "test_py_image",
-  main = "scraper.py",
-  srcs = ["scraper.py"],
-  deps = [
-    requirement("requests"),
-    requirement("beautifulsoup4"),
-    requirement("lxml"),
-    requirement("aiohttp"),
-    requirement("python-daemon"),
-    "//utils:async-utils"
-  ]
+    name = "test_py_image",
+    srcs = ["scraper.py"],
+    main = "scraper.py",
+    deps = [
+        requirement("requests"),
+        requirement("beautifulsoup4"),
+        requirement("lxml"),
+        requirement("aiohttp"),
+        requirement("python-daemon"),
+        "//utils:async-utils",
+    ],
 )
 
-
 py3_image(
-  name = "test_py3_image",
-  main = "scraper.py",
-  srcs = ["scraper.py"],
-  deps = [
-    requirement("requests"),
-    requirement("beautifulsoup4"),
-    requirement("lxml"),
-    requirement("aiohttp"),
-    requirement("python-daemon"),
-    "//utils:async-utils"
-  ]
+    name = "test_py3_image",
+    srcs = ["scraper.py"],
+    main = "scraper.py",
+    deps = [
+        requirement("requests"),
+        requirement("beautifulsoup4"),
+        requirement("lxml"),
+        requirement("aiohttp"),
+        requirement("python-daemon"),
+        "//utils:async-utils",
+    ],
+)
+
+py_wheel(
+    name = "test_wheel",
+    distribution = "web_scrapper_wheel",
+    python_tag = "py3",
+    version = "1.0.0",
+    deps = [
+        requirement("requests"),
+        requirement("beautifulsoup4"),
+        requirement("lxml"),
+        requirement("aiohttp"),
+        requirement("python-daemon"),
+        "//utils:async-utils",
+    ],
 )
