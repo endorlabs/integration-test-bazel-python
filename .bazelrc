@@ -1,4 +1,2 @@
 common --nobuild_runfile_links
 build --@io_bazel_rules_docker//transitions:enable=false
-## common --announce_rc
-import .bazelrc.user

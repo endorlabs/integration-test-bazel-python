@@ -1,0 +1,21 @@
+# Minimal custom bazelrc for testing BazelCustomBazelrcPath functionality
+# This configuration is designed to cause build failures to prove custom bazelrc is applied
+
+# Extremely short timeout - will cause dependency downloads to fail
+
+common --nobuild_runfile_links
+build --@io_bazel_rules_docker//transitions:enable=false
+
+build --remote_timeout=1000000
+
+# Fail immediately on any error instead of continuing
+build --keep_going=false
+
+# Scale all timeouts to 1/1000th of normal - guaranteed to cause timeouts
+build --experimental_scale_timeouts=0.001
+
+# Use only 1 job to slow down builds significantly  
+build --jobs=1
+
+# Add verbose output to see the custom config is being used
+build --announce_rc
