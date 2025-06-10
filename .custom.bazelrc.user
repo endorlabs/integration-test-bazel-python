@@ -3,10 +3,8 @@
 
 # Extremely short timeout - will cause dependency downloads to fail
 
-common --nobuild_runfile_links
-build --@io_bazel_rules_docker//transitions:enable=false
 
-build --remote_timeout=1000000
+build --remote_timeout=1
 
 # Fail immediately on any error instead of continuing
 build --keep_going=false
