@@ -36,6 +36,12 @@ compile_pip_requirements(
     requirements_txt = "requirements_lock.txt",
 )
 
+compile_pip_requirements(
+    name = "compile_requirements_dup",
+    requirements_in = "requirements_dup.in",
+    requirements_txt = "requirements_dup_lock.txt",
+)
+
 py_binary(
     name = "main",
     srcs = ["scraper.py"],

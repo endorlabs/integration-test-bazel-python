@@ -1,7 +1,11 @@
+load("@dup_pip_deps//:requirements.bzl", dup_requirement = "requirement")
 load("@rules_python//python:py_library.bzl", "py_library")
 
 py_library(
     name = "async-utils",
     srcs = ["asyncRunner.py"],
-    visibility = ["//visibility:public"]
+    visibility = ["//visibility:public"],
+    deps = [
+        dup_requirement("aiohttp"),
+    ],
 )

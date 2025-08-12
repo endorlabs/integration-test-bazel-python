@@ -15,6 +15,7 @@ http_archive(
 load("@io_bazel_rules_go//go:deps.bzl", "go_register_toolchains", "go_rules_dependencies")
 
 go_rules_dependencies()
+
 go_register_toolchains(version = "1.23.2")
 
 ## And on gazelle
@@ -30,9 +31,8 @@ http_archive(
 )
 
 load("@bazel_gazelle//:deps.bzl", "gazelle_dependencies")
+
 gazelle_dependencies()
-
-
 
 http_archive(
     name = "rules_python",
@@ -48,11 +48,9 @@ http_archive(
 #     url = "https://github.com/bazelbuild/rules_python/archive/refs/tags/0.10.2.tar.gz",
 # )
 
-load("@rules_python//python:repositories.bzl", "py_repositories")
+load("@rules_python//python:repositories.bzl", "py_repositories", "python_register_toolchains")
+
 py_repositories()
-
-
-load("@rules_python//python:repositories.bzl", "python_register_toolchains")
 
 python_register_toolchains(
     name = "python_3_13",
@@ -68,8 +66,18 @@ pip_parse(
 )
 
 load("@pip_deps//:requirements.bzl", "install_deps")
+
 install_deps()
 
+pip_parse(
+    name = "dup_pip_deps",
+    python_interpreter_target = "@python_3_13_host//:python",
+    requirements_lock = "//:requirements_dup_lock.txt",
+)
+
+load("@dup_pip_deps//:requirements.bzl", dup_install_deps = "install_deps")
+
+dup_install_deps()
 
 ## rules_docker
 docker_version = "0.25.0"
@@ -82,12 +90,14 @@ http_archive(
     ],
 )
 
+load("@io_bazel_rules_docker//python:image.bzl", _py_image_repos = "repositories")
+load("@io_bazel_rules_docker//python3:image.bzl", _py3_image_repos = "repositories")
 load("@io_bazel_rules_docker//repositories:repositories.bzl", container_repositories = "repositories")
-load("@io_bazel_rules_docker//python:image.bzl", _py_image_repos = "repositories",)
-load("@io_bazel_rules_docker//python3:image.bzl", _py3_image_repos = "repositories",)
 
 container_repositories()
+
 _py_image_repos()
+
 _py3_image_repos()
 
 ## rules_docker ends here.
